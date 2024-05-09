@@ -155,3 +155,35 @@ app.post('/transferencia', async (req, res) => {
     }
   });
 
+// Ruta para recuperar todas las transferencias (GET /transferencias)
+app.get('/transferencias', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM transferencias');
+    const transfers = result.rows;
+    await client.release();
+
+    // Formato de fechas usando moment
+    transfers.forEach((transfer) => {
+      transfer.fecha = formatDate(transfer.fecha);
+    });
+
+    res.json(transfers);
+  } catch (error) {
+    console.error(chalk.red('Error fetching transfers:', error));
+    res.status(500).send({ message: 'Error obteniendo transferencias' });
+  }
+});
+
+// Formato para las fechas en las transferencias
+const formatDate = (date) => {
+  const dateFormat = moment(date).format('L');
+  const timeFormat = moment(date).format('LTS');
+  return `${dateFormat} ${timeFormat}`;
+};
+
+// Inicializar el servidor
+app.listen(port, () => {
+  console.log(chalk.green(`Server started on port ${port}`));
+});
+
