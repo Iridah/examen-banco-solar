@@ -1,0 +1,18 @@
+{
+  "name": "examenmod7",
+  "version": "1.0.0",
+  "description": "Examen del modulo 7, bootcamp Javascript desafiolatam",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alejandro Silva Quiñones",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "express": "^4.19.2",
+    "moment": "^2.30.1",
+    "nodemon": "^3.1.0",
+    "pg": "^8.11.5"
+  }
+}
