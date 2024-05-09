@@ -28,23 +28,6 @@ const pool = new Pool({
   }
 })();
 
-// Crear la tabla de transferencias
-(async () => {
-  try {
-    await pool.query(`CREATE TABLE IF NOT EXISTS transferencias (
-      id SERIAL PRIMARY KEY,
-      fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      emisor VARCHAR(255) NOT NULL,
-      receptor VARCHAR(255) NOT NULL,
-      monto DECIMAL(10,2) NOT NULL,
-      FOREIGN KEY (emisor) REFERENCES usuarios(nombre),
-      FOREIGN KEY (receptor) REFERENCES usuarios(nombre)
-    )`);
-  } catch (error) {
-    console.error(chalk.red('Error creando la tabla de transferencia:', error));
-  }
-})();
-
 // Entrega la tabla HTML del cliente
 app.use(express.static('public'));
 
